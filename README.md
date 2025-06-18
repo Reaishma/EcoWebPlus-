@@ -27,5 +27,5 @@ Author
 Contributions welcome! 🌟 Fork the repository and submit a pull request.
 
 License
-MIT License 📄
+GNU GENERAL PUBLIC LICENSE Version 📄
 
