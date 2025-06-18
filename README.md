@@ -20,6 +20,8 @@ Getting Started
     1. Download the repository: Click the green "Code" button, then select "Download ZIP".
     2. Open `index.html` in a web browser.
 
+Author
+**Reaishma N**
 Contributing
 Contributions welcome! 🌟 Fork the repository and submit a pull request.
 
