@@ -14,9 +14,10 @@ Features
 * **JavaScript**: Interactive elements.
 
  Getting Started
-1. Clone the repository:https://Reaishma.github.io/Eco-friendly-website-                                               
+1.  the repository:https://Reaishma.github.io/Eco-friendly-website-                                               
 2. Open `index.html` in a web browser.
- Contributing
+For  Contributing
+
 Contributions welcome! Fork the repository and submit a pull request.
 
  License
