@@ -22,7 +22,8 @@ Getting Started
 
 Author
 **Reaishma N**
-Contributing
+
+ For Contributing
 Contributions welcome! 🌟 Fork the repository and submit a pull request.
 
 License
