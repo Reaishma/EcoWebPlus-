@@ -8,19 +8,6 @@ EcoLife is a comprehensive sustainability tracking application designed to help 
 
 
 
-## Recent Changes
-
-### December 2024 - Complete Website Export
-- Created complete HTML/CSS/JavaScript version (ecolife-complete.html)
-- Removed contact information from Connect section as requested
-- Fixed number input issues in calculator to prevent leading zeros
-- Made all "Learn More" links functional with proper section navigation
-- Removed "Resources" and "Follow Us" sections from footer
-- Removed "All rights reserved" text from footer
-- Generated comprehensive README.md with full project documentation
-
-
-
 ## System Architecture
 
 ### Frontend Architecture
