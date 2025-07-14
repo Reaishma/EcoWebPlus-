@@ -57,7 +57,7 @@ EcoLife is a comprehensive sustainability tracking application designed to help 
 
 ## 🚀 Live Demo
 
-[view Demo](.   )
+[view Demo](https://reaishma.github.io/EcoWebPlus-/)
 
 ## Data Flow
 
