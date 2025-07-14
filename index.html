@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoLife - Sustainable Living Made Simple</title>
+    <meta name="description" content="Join millions in creating a greener future. Calculate your carbon footprint, discover eco-friendly habits, and make a difference today with EcoLife.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="EcoLife - Sustainable Living Made Simple">
+    <meta property="og:description" content="Calculate your carbon footprint and discover eco-friendly habits for a greener future.">
+    <meta property="og:type" content="website">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --forest-green: hsl(134, 61%, 41%);
+            --sage-green: hsl(87, 34%, 58%);
+            --earth-brown: hsl(30, 67%, 34%);
+            --sky-blue: hsl(197, 71%, 73%);
+            --leaf-green: hsl(120, 73%, 75%);
+            --sunset-orange: hsl(33, 100%, 50%);
+            --warm-white: hsl(0, 0%, 98%);
+            --deep-forest: hsl(0, 0%, 10%);
+            --muted-green: hsl(82, 39%, 30%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--forest-green) 0%, var(--sage-green) 100%);
+        }
+
+        .organic-shape {
+            border-radius: 60% 40% 40% 60% / 60% 30% 70% 40%;
+        }
+
+        .eco-card {
+            transition: all 0.3s ease;
+        }
+
+        .eco-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-float-delay {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        .animate-float-delay-2 {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 4s;
+        }
+
+        /* Dark mode styles */
+        .dark {
+            --tw-bg-opacity: 1;
+            background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+            color: rgb(243 244 246 / var(--tw-text-opacity));
+        }
+
+        .dark .bg-white {
+            --tw-bg-opacity: 1;
+            background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+        }
+
+        .dark .bg-gray-50 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+        }
+
+        .dark .text-gray-600 {
+            --tw-text-opacity: 1;
+            color: rgb(156 163 175 / var(--tw-text-opacity));
+        }
+
+        .dark .text-gray-700 {
+            --tw-text-opacity: 1;
+            color: rgb(209 213 219 / var(--tw-text-opacity));
+        }
+
+        .dark .border-gray-300 {
+            --tw-border-opacity: 1;
+            border-color: rgb(75 85 99 / var(--tw-border-opacity));
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: hsl(0, 0%, 95%);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--forest-green);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: hsl(134, 61%, 35%);
+        }
+
+        .dark ::-webkit-scrollbar-track {
+            background: hsl(240, 3.7%, 15.9%);
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: var(--forest-green);
+        }
+
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: hsl(134, 61%, 50%);
+        }
+
+        /* Toast notification styles */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background-color: var(--forest-green);
+        }
+
+        .toast.error {
+            background-color: #ef4444;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-r from-green-600 to-green-800 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold text-green-800 dark:text-green-400">EcoLife</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <button onclick="scrollToSection('home')" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors">Home</button>
+                    <button onclick="scrollToSection('about')" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors">About</button>
+                    <button onclick="scrollToSection('features')" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors">Features</button>
+                    <button onclick="scrollToSection('calculator')" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors">Calculator</button>
+                    <button onclick="scrollToSection('connect')" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors">Connect</button>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                        <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg id="moon-icon" class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                    
+                    <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <button onclick="scrollToSection('home')" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors text-left">Home</button>
+                    <button onclick="scrollToSection('about')" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors text-left">About</button>
+                    <button onclick="scrollToSection('features')" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors text-left">Features</button>
+                    <button onclick="scrollToSection('calculator')" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors text-left">Calculator</button>
+                    <button onclick="scrollToSection('connect')" class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors text-left">Connect</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 gradient-bg"></div>
+        <div class="absolute inset-0 opacity-10">
+            <div class="w-full h-full" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.1\'%3E%3Cpath d=\'M30 30c0-16.569 13.431-30 30-30v30H30z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-green-300/20 rounded-full animate-float"></div>
+        <div class="absolute bottom-32 right-16 w-16 h-16 bg-blue-300/20 rounded-full animate-float-delay"></div>
+        <div class="absolute top-1/3 right-1/4 w-12 h-12 bg-orange-300/20 rounded-full animate-float-delay-2"></div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                    Live <span class="text-green-200">Sustainably</span>,<br />
+                    Impact <span class="text-blue-200">Positively</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+                    Join millions in creating a greener future. Calculate your carbon footprint, 
+                    discover eco-friendly habits, and make a difference today.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="scrollToSection('calculator')" class="bg-white text-green-800 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                        <span>Calculate Impact</span>
+                    </button>
+                    <button onclick="scrollToSection('about')" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-green-800 transition-all duration-300 flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-5-4h.01M12 16h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                        <span>Learn More</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-green-800 dark:text-green-400 mb-6">
+                    Why Choose Sustainable Living?
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+                    Every small action contributes to a larger impact. Our platform helps you understand 
+                    your environmental footprint and provides actionable insights to reduce it.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-green-600 to-green-800 rounded-full flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9c-5 0-9-4-9-9s4-9 9-9"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-green-800 dark:text-green-400 mb-2">Global Impact</h3>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                Join a worldwide movement of conscious consumers making environmentally responsible choices.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-green-800 dark:text-green-400 mb-2">Data-Driven Insights</h3>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                Get personalized recommendations based on your lifestyle and consumption patterns.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-green-800 dark:text-green-400 mb-2">Future Generations</h3>
+                            <p class="text-gray-600 dark:text-gray-400">
+                                Create a sustainable legacy for future generations through mindful living today.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                         alt="Lush green forest with sunlight streaming through trees" 
+                         class="rounded-2xl shadow-2xl w-full h-auto organic-shape">
+                    
+                    <div class="absolute -top-8 -right-8 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl animate-float">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-800 dark:text-green-400" id="trees-counter">50,847</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Trees Saved</div>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -bottom-8 -left-8 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl animate-float-delay">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-800 dark:text-green-400" id="co2-counter">125,932</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">CO₂ Reduced (kg)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-green-800 dark:text-green-400 mb-6">
+                    Powerful Features for Sustainable Living
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                    Discover tools and insights designed to help you live more sustainably and reduce your environmental impact.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg eco-card">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-green-800 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-green-800 dark:text-green-400 mb-4">Carbon Calculator</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Track your carbon footprint across transportation, energy, food, and lifestyle choices with our advanced calculator.
+                    </p>
+                    <button onclick="scrollToSection('calculator')" class="text-green-600 dark:text-green-400 font-semibold hover:underline flex items-center space-x-2">
+                        <span>Learn More</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg eco-card">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-green-800 dark:text-green-400 mb-4">Smart Recommendations</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Get personalized suggestions to reduce your environmental impact based on your lifestyle and habits.
+                    </p>
+                    <button onclick="scrollToSection('calculator')" class="text-green-600 dark:text-green-400 font-semibold hover:underline flex items-center space-x-2">
+                        <span>Learn More</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg eco-card">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-green-800 dark:text-green-400 mb-4">Progress Tracking</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Monitor your environmental impact over time and celebrate your achievements in sustainable living.
+                    </p>
+                    <button onclick="scrollToSection('calculator')" class="text-green-600 dark:text-green-400 font-semibold hover:underline flex items-center space-x-2">
+                        <span>Learn More</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg eco-card">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-green-800 dark:text-green-400 mb-4">Community Impact</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Connect with like-minded individuals and see how your actions contribute to collective environmental goals.
+                    </p>
+                    <button onclick="scrollToSection('connect')" class="text-green-600 dark:text-green-400 font-semibold hover:underline flex items-center space-x-2">
+                        <span>Learn More</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg eco-card">
+                    <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-green-800 dark:text-green-400 mb-4">Mobile Friendly</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Access all features on any device with our responsive design that works seamlessly across platforms.
+                    </p>
+                    <button onclick="scrollToSection('about')" class="text-green-600 dark:text-green-400 font-semibold hover:underline flex items-center space-x-2">
+                        <span>Learn More</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg eco-card">
+                    <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-green-600 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-green-800 dark:text-green-400 mb-4">Achievements</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Earn badges and rewards for meeting sustainability goals and making positive environmental choices.
+                    </p>
+                    <button onclick="scrollToSection('calculator')" class="text-green-600 dark:text-green-400 font-semibold hover:underline flex items-center space-x-2">
+                        <span>Learn More</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carbon Calculator Section -->
+    <section id="calculator" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-green-800 dark:text-green-400 mb-6">
+                    Carbon Footprint Calculator
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                    Calculate your environmental impact and discover ways to reduce your carbon footprint.
+                </p>
+            </div>
+            
+            <div class="max-w-6xl mx-auto bg-gray-50 dark:bg-gray-800 rounded-3xl p-8 shadow-xl">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Calculator Form -->
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-green-800 dark:text-green-400 mb-6">Your Lifestyle Data</h3>
+                        
+                        <!-- Transportation -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-gray-700 dark:text-gray-300 flex items-center">
+                                <svg class="w-5 h-5 text-green-600 dark:text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                Transportation
+                            </h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600 dark:text-gray-400 mb-1">Miles/Month</label>
+                                    <input type="number" id="carMiles" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" placeholder="1000">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 dark:text-gray-400 mb-1">Fuel Type</label>
+                                    <select id="fuelType" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                                        <option value="gasoline">Gasoline</option>
+                                        <option value="diesel">Diesel</option>
+                                        <option value="electric">Electric</option>
+                                        <option value="hybrid">Hybrid</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Energy -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-gray-700 dark:text-gray-300 flex items-center">
+                                <svg class="w-5 h-5 text-green-600 dark:text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                Energy Usage
+                            </h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600 dark:text-gray-400 mb-1">Monthly Electric Bill ($)</label>
+                                    <input type="number" id="electricBill" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" placeholder="150">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 dark:text-gray-400 mb-1">Monthly Gas Bill ($)</label>
+                                    <input type="number" id="gasBill" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" placeholder="80">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Food -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-gray-700 dark:text-gray-300 flex items-center">
+                                <svg class="w-5 h-5 text-green-600 dark:text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+                                </svg>
+                                Food & Diet
+                            </h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600 dark:text-gray-400 mb-1">Diet Type</label>
+                                    <select id="dietType" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                                        <option value="omnivore">Omnivore</option>
+                                        <option value="vegetarian">Vegetarian</option>
+                                        <option value="vegan">Vegan</option>
+                                        <option value="pescatarian">Pescatarian</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 dark:text-gray-400 mb-1">Local Food %</label>
+                                    <input type="number" id="localFood" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" placeholder="30" min="0" max="100">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Lifestyle -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-gray-700 dark:text-gray-300 flex items-center">
+                                <svg class="w-5 h-5 text-green-600 dark:text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                </svg>
+                                Lifestyle
+                            </h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600 dark:text-gray-400 mb-1">Flights/Year</label>
+                                    <input type="number" id="flights" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" placeholder="2">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 dark:text-gray-400 mb-1">Household Size</label>
+                                    <input type="number" id="householdSize" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" placeholder="3">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="calculateEmissions()" class="w-full bg-gradient-to-r from-green-600 to-green-800 text-white py-4 rounded-lg font-semibold hover:from-green-700 hover:to-green-900 transition-all duration-300 shadow-lg flex items-center justify-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                            </svg>
+                            <span>Calculate My Impact</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Results -->
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-green-800 dark:text-green-400 mb-6">Your Carbon Footprint</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg text-center">
+                                <div class="w-20 h-20 bg-gradient-to-r from-green-600 to-green-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                                    </svg>
+                                </div>
+                                <div class="text-4xl font-bold text-green-800 dark:text-green-400 mb-2" id="totalEmissions">--</div>
+                                <div class="text-gray-600 dark:text-gray-400">tons CO₂ per year</div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-lg text-center">
+                                    <div class="text-2xl font-bold text-green-800 dark:text-green-400" id="transportEmissions">--</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">Transport</div>
+                                </div>
+                                <div class="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-lg text-center">
+                                    <div class="text-2xl font-bold text-green-800 dark:text-green-400" id="energyEmissions">--</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">Energy</div>
+                                </div>
+                                <div class="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-lg text-center">
+                                    <div class="text-2xl font-bold text-green-800 dark:text-green-400" id="foodEmissions">--</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">Food</div>
+                                </div>
+                                <div class="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-lg text-center">
+                                    <div class="text-2xl font-bold text-green-800 dark:text-green-400" id="lifestyleEmissions">--</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">Lifestyle</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="recommendations" class="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg hidden">
+                            <h4 class="text-lg font-semibold text-green-800 dark:text-green-400 mb-4">Recommendations</h4>
+                            <div id="recommendationsList" class="space-y-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connect Section -->
+    <section id="connect" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-green-800 dark:text-green-400 mb-6">
+                    Let's Connect
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                    Have questions about sustainable living? Want to share your eco-journey? 
+                    We'd love to hear from you and help you on your path to a greener lifestyle.
+                </p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-xl">
+                <form id="contactForm" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">First Name</label>
+                            <input type="text" id="firstName" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" placeholder="Your first name" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Last Name</label>
+                            <input type="text" id="lastName" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" placeholder="Your last name" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+                        <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                        <select id="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Calculator Feedback">Calculator Feedback</option>
+                            <option value="Sustainability Tips">Sustainability Tips</option>
+                            <option value="Partnership Opportunity">Partnership Opportunity</option>
+                            <option value="Technical Support">Technical Support</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                        <textarea rows="6" id="message" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all resize-none" placeholder="Tell us about your sustainability journey or ask any questions..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-green-600 to-green-800 text-white py-4 rounded-lg font-semibold hover:from-green-700 hover:to-green-900 transition-all duration-300 shadow-lg flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                        </svg>
+                        <span>Send Message</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-800 dark:bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-bold">EcoLife</span>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        Empowering individuals to make sustainable choices for a healthier planet and brighter future.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><button onclick="scrollToSection('home')" class="text-gray-300 hover:text-white transition-colors">Home</button></li>
+                        <li><button onclick="scrollToSection('about')" class="text-gray-300 hover:text-white transition-colors">About</button></li>
+                        <li><button onclick="scrollToSection('features')" class="text-gray-300 hover:text-white transition-colors">Features</button></li>
+                        <li><button onclick="scrollToSection('calculator')" class="text-gray-300 hover:text-white transition-colors">Calculator</button></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <div class="text-sm text-gray-400">
+                    <p>Developed by <span class="font-semibold">Reaishma N</span></p>
+                    <p class="mt-1">
+                        <a href="mailto:vra.9618@gmail.com" class="hover:text-green-400 transition-colors inline-flex items-center space-x-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>vra.9618@gmail.com</span>
+                        </a>
+                        <span class="mx-2">|</span>
+                        <a href="https://github.com/Reaishma" target="_blank" rel="noopener noreferrer" class="hover:text-green-400 transition-colors inline-flex items-center space-x-1">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+                            </svg>
+                            <span>GitHub Profile</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <script>
+        // Theme Management
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const html = document.documentElement;
+
+        // Initialize theme
+        let currentTheme = localStorage.getItem('theme') || 'light';
+        html.classList.add(currentTheme);
+        updateThemeIcons();
+
+        function updateThemeIcons() {
+            if (currentTheme === 'dark') {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.classList.remove('light', 'dark');
+            html.classList.add(currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            updateThemeIcons();
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth Scrolling
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Close mobile menu if open
+            mobileMenu.classList.add('hidden');
+        }
+
+        // Counter Animation
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current).toLocaleString();
+            }, 16);
+        }
+
+        // Animate counters on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(document.getElementById('trees-counter'), 50847);
+                    animateCounter(document.getElementById('co2-counter'), 125932);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(document.getElementById('about'));
+
+        // Carbon Calculator
+        function calculateEmissions() {
+            const carMiles = parseFloat(document.getElementById('carMiles').value) || 0;
+            const fuelType = document.getElementById('fuelType').value;
+            const electricBill = parseFloat(document.getElementById('electricBill').value) || 0;
+            const gasBill = parseFloat(document.getElementById('gasBill').value) || 0;
+            const dietType = document.getElementById('dietType').value;
+            const localFood = parseFloat(document.getElementById('localFood').value) || 0;
+            const flights = parseFloat(document.getElementById('flights').value) || 0;
+            const householdSize = parseFloat(document.getElementById('householdSize').value) || 1;
+
+            // Fuel emission factors (kg CO2 per mile)
+            const fuelFactors = {
+                gasoline: 0.4,
+                diesel: 0.45,
+                electric: 0.1,
+                hybrid: 0.25
+            };
+
+            // Diet emission factors (tons CO2 per year)
+            const dietFactors = {
+                omnivore: 3.3,
+                vegetarian: 2.5,
+                vegan: 1.5,
+                pescatarian: 2.8
+            };
+
+            const transportEmissions = (carMiles * 12 * fuelFactors[fuelType]) / 1000;
+            const energyEmissions = ((electricBill * 0.7) + (gasBill * 0.5)) / 100;
+            const foodEmissions = dietFactors[dietType] * (1 - localFood / 100);
+            const lifestyleEmissions = flights * 0.5 + (householdSize * 0.2);
+
+            const total = transportEmissions + energyEmissions + foodEmissions + lifestyleEmissions;
+
+            // Update results
+            document.getElementById('totalEmissions').textContent = total.toFixed(1);
+            document.getElementById('transportEmissions').textContent = transportEmissions.toFixed(1);
+            document.getElementById('energyEmissions').textContent = energyEmissions.toFixed(1);
+            document.getElementById('foodEmissions').textContent = foodEmissions.toFixed(1);
+            document.getElementById('lifestyleEmissions').textContent = lifestyleEmissions.toFixed(1);
+
+            // Generate recommendations
+            const recommendations = getRecommendations(transportEmissions, energyEmissions, foodEmissions, lifestyleEmissions, total);
+            displayRecommendations(recommendations);
+        }
+
+        function getRecommendations(transport, energy, food, lifestyle, total) {
+            const tips = [];
+            
+            if (transport > 2) {
+                tips.push("Consider carpooling, public transit, or electric vehicles to reduce transport emissions.");
+            }
+            if (energy > 2) {
+                tips.push("Switch to LED bulbs and consider renewable energy sources for your home.");
+            }
+            if (food > 2) {
+                tips.push("Try reducing meat consumption and buying more local, seasonal produce.");
+            }
+            if (lifestyle > 1) {
+                tips.push("Consider offsetting flights or choosing closer vacation destinations.");
+            }
+            if (total < 5) {
+                tips.push("Great job! You're already living sustainably. Keep up the good work!");
+            }
+
+            return tips;
+        }
+
+        function displayRecommendations(recommendations) {
+            const container = document.getElementById('recommendations');
+            const list = document.getElementById('recommendationsList');
+            
+            list.innerHTML = '';
+            
+            recommendations.forEach(tip => {
+                const item = document.createElement('div');
+                item.className = 'flex items-start space-x-2 text-sm text-gray-600 dark:text-gray-400';
+                item.innerHTML = `
+                    <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
+                    </svg>
+                    <span>${tip}</span>
+                `;
+                list.appendChild(item);
+            });
+            
+            container.classList.remove('hidden');
+        }
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            if (!firstName || !lastName || !email || !message) {
+                showToast('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            // Simulate form submission
+            showToast('Your message has been sent successfully!', 'success');
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+        });
+
+        // Toast Notifications
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            
+            document.getElementById('toast-container').appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any initialization code here
+        });
+    </script>
+</body>
+</html>
