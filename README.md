@@ -183,7 +183,7 @@ Based on calculated emissions, the app provides targeted suggestions:
 
 ## 📝 License
 
-This project is open source and available under the GNU GENERAL PUBLIC LICENSE Version 📄](LICENSE).
+This project is open source and available under the GNU GENERAL PUBLIC LICENSE Version 📄.
 
 ## 👨‍💻 Developer
 
