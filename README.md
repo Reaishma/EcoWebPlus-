@@ -2,6 +2,10 @@
 
 A comprehensive sustainability tracking web application designed to help users monitor and reduce their environmental impact through interactive carbon footprint calculations and personalized recommendations.
 
+# 🚀 Live Demo
+
+view Demo https://reaishma.github.io/EcoWebPlus-/
+
 ## 🌱 Overview
 
 EcoLife is a comprehensive sustainability tracking application designed to help users monitor and reduce their environmental impact. The application features a carbon footprint calculator, personalized recommendations, and a contact system for user engagement. Built with a modern tech stack including React, TypeScript, and PostgreSQL, it provides an intuitive interface for environmental awareness and action.
