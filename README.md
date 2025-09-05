@@ -49,6 +49,8 @@ EcoLife is a comprehensive sustainability tracking application designed to help 
 5. **Contact Form**: User engagement and feedback collection
 6. **Theme System**: Dark/light mode with persistent preferences
 
+![frontend dark theme](https://github.com/Reaishma/EcoWebPlus-/blob/main/Screenshot_20250904-202004_1.jpg)
+
 ### Backend Components
 1. **Express Server**: RESTful API with middleware for logging and error handling
 2. **Storage Layer**: Abstract storage interface with in-memory implementation
