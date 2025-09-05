@@ -106,7 +106,7 @@ Based on calculated emissions, the app provides targeted suggestions:
 - **Food**: Reduced meat consumption, local produce
 - **Lifestyle**: Flight offsetting, sustainable travel choices
 
-##📋 Usage Guide
+## 📋 Usage Guide
 
 ### Getting Started
 1. **Navigation**: Use the top navigation to jump between sections
@@ -114,6 +114,8 @@ Based on calculated emissions, the app provides targeted suggestions:
 3. **Calculator**: Fill in your lifestyle data and click "Calculate My Impact"
 4. **Recommendations**: Review personalized suggestions based on your results
 5. **Contact**: Use the contact form to connect with the development team
+
+![Contact form](https://github.com/Reaishma/EcoWebPlus-/blob/main/Screenshot_20250904-201907_2.jpg)
 
 ### Calculator Tips
 - **Accuracy**: Provide accurate data for better recommendations
