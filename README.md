@@ -199,6 +199,8 @@ This project is open source and available under the GNU GENERAL PUBLIC LICENSE V
 
 ## 🌍 Environmental Impact
 
+![personalised features](https://github.com/Reaishma/EcoWebPlus-/blob/main/Screenshot_20250904-201746_1.jpg)
+
 By using EcoLife, you're contributing to:
 - **Awareness**: Understanding personal environmental impact
 - **Action**: Taking concrete steps toward sustainability
