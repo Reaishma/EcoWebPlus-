@@ -2,6 +2,8 @@
 
 A comprehensive sustainability tracking web application designed to help users monitor and reduce their environmental impact through interactive carbon footprint calculations and personalized recommendations.
 
+![Overview](https://github.com/Reaishma/EcoWebPlus-/blob/main/Screenshot_20250904-201721_1.jpg)
+
 # 🚀 Live Demo
 
 view Demo https://reaishma.github.io/EcoWebPlus-/
