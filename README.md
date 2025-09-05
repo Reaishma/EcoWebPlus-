@@ -61,10 +61,6 @@ EcoLife is a comprehensive sustainability tracking application designed to help 
 - Accessibility-first components with proper ARIA support
 
 
-## 🚀 Live Demo
-
-[view Demo](https://reaishma.github.io/EcoWebPlus-/)
-
 ## Data Flow
 
 ### Contact Form Flow
@@ -78,6 +74,8 @@ EcoLife is a comprehensive sustainability tracking application designed to help 
 ## 🧮 Carbon Calculator
 
 The carbon footprint calculator evaluates four key areas:
+
+![Carbon calculator](https://github.com/Reaishma/EcoWebPlus-/blob/main/Screenshot_20250904-201848_1.jpg)
 
 ### Transportation
 - Monthly driving miles
